@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode} 
+\usepackage{tabto}
+\usepackage{mathtools}
+
+%---enable russian----
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+% PROBABILITY SYMBOLS
+\newcommand*\PROB\Pr 
+\DeclareMathOperator*{\EXPECT}{\mathbb{E}}
+
+
+% Sets, Rngs, ets 
+\newcommand{\N}{{{\mathbb N}}}
+\newcommand{\Z}{{{\mathbb Z}}}
+\newcommand{\R}{{{\mathbb R}}}
+\newcommand{\Zp}{\ints_p} % Integers modulo p
+\newcommand{\Zq}{\ints_q} % Integers modulo q
+\newcommand{\Zn}{\ints_N} % Integers modulo N
+
+% Landau 
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand*{\OLandau}{\bigO}
+\newcommand*{\WLandau}{\Omega}
+\newcommand*{\xOLandau}{\widetilde{\OLandau}}
+\newcommand*{\xWLandau}{\widetilde{\WLandau}}
+\newcommand*{\TLandau}{\Theta}
+\newcommand*{\xTLandau}{\widetilde{\TLandau}}
+\newcommand{\smallo}{o} %technically, an omicron
+\newcommand{\softO}{\widetilde{\bigO}}
+\newcommand{\wLandau}{\omega}
+\newcommand{\negl}{\mathrm{negl}} 
+
+% Misc
+\newcommand{\eps}{\varepsilon}
+\newcommand{\inprod}[1]{\left\langle #1 \right\rangle}
+
+ 
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf Научно-исследовательская практика} \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{ФИО: #4}{Некоторые свойства Фи-функции #1}}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{definition}{Определение}
+\newtheorem{corollary}{Следствие}
+\newtheorem{fact}{Факт}
+
+% 1-inch margins
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+
+
+% main
+\begin{document}
+
+\lecture{}{Лето 2020}{}{Щепецков Леонид}
+В этой установке мы находим, что решающая сумма равна:
+$$1 + 7 + 11 + 13 + 17 + 19 + 23 + 29 = 120 = \frac{1}{2} \cdot 30 \cdot 8. $$
+\hspace{37mm}Это хороший момент, чтобы дать применение формулы инверсии Мёбиуса.
+
+\textsc{Теорема 7-8.} \hspace{3mm}\emph{Для любого положительного числа n,}
+$$\phi (n) = n \sum_{d|n} \mu(d)/d$$
+\textit{Доказательство:} Доказательство обманчиво просто: если применить формулу инверсии к
+$$F(n) = n = \sum_{d|n} \phi(d),$$
+результатом будет
+$$\phi(n) = \sum_{d|n} \mu(d)F(n/d) = \sum_{d|n}\mu(d)n/d.$$
+Давайте рассмотрим ситуацию, когда $n = 10$ снова. Легко можно заметить, что
+\begin{align*}
+10 \sum_{\alpha|10}\mu(d)/d &= 10 [\mu(1) + \mu(2)/2 + \mu(5)/5 + \mu(10)/10] \\ 
+&=  10[1 + (-1)/2 + (-1)/5 + (-1)^2/10] \\ 
+&=  10[1 - 1/2 - 1/5 + 1/10] = 10 \cdot 2/5 = 4 = \phi(10).
+\end{align*}
+Начиная с Теоремы 7-8, легко определить значение Фи-Функции для любого положительного целого числа $n$. Предположим, что разложение простой степени $n$ это $n = p_1^{k_1}p_2^{k_2} \dots p_r^{k_r}$ и рассмотрим продукт
+$$ P = \prod_{p_i|n} \big(\mu(1)+\mu(p_i)/p_i + \dots + \mu(p_i^{k_i})/p_i^{k_i}\big). $$
+Умножив это, получим сумму членов вида
+$$\mu(1)\mu(p_1^{a_1})\mu(p_2^{a_2}) \dots \mu(p_r^{a_r})/p_1^{a_1}p_2^{a_2} \dots p_r^{a_r}, $$
+
+\begin{flushright}
+$ 0 \leq a_i \leq k_i $
+\end{flushright} 
+
+
+или, так как известно, что $\mu$ мультипликативно,
+$$\mu(p_1^{a_1}p_2^{a_2}\dots p_r^{a_r}/p_1^{a_1}p_2^{a_2} \dots p_r^{a_r} = \mu(d)/d,$$
+где суммирование происходит по множеству делителей $d = p_1^{a_1}p_2^{a_2}\dots p_r^{a_r}$ по $n$. Следовательно, $P = \sum_{d|n} \mu(d)/d$. Это следует из Теоремы 7-8, что
+$$ \phi(n) = n \sum_{d|n} \mu(d)/d = n \prod_{p_i|n} \big(\mu(1)+\mu(p_i)/p_i + \dots + \mu(p_i^{k_i})/p_i^{k_i}\big). $$
+Но $\mu(p_i^{a_i}) = 0 $ всякий раз, когда $a_i\geq 2.$ Как результат, последнее записанное уравнение сводится к
+$$\phi(n) = n \prod_{p_i|n}(\mu(1)+\mu(p_i)/p_i) = n \prod_{p_i|n}(1-1/p_i),$$
+что согласуется с формулой, установленной ранее другими рассуждениями. Что существенно в этом аргументе, так это то, что не делается никакого предположения относительно мультипликативного характера фи-функции, только о $\mu$
+
+\begin{center}
+    \textbf{\Large ЗАДАЧИ 7.4}
+\end{center}
+
+
+\begin{enumerate} 
+  \item Для натурального числа $n$, докажите что
+    \begin{align*}
+        \sum_{d|n}(-1)^{n/d}\phi(d) =  
+            \begin{cases}
+                0 &\text{если $n$ чётный} \\
+                $-n$ &\text{если $n$ нечётный} 
+            \end{cases}
+    \end{align*}
+    [Подсказка: Если $n = 2^kN$, где $N$ нечётный, тогда $\sum_{d|n}(-1)^{n/d}\phi(d) = \sum_{d|2^{k-1}N}\phi(d) - \sum_{d|N}\phi(2^kd).$]
+  \item Подтвердите, что $\sum_{d|36}\phi(d) = 36$ и $\sum_{d|36}(-1)^{36/d}\phi(d) = 0.$
+  \item Для положительного числа $n$, докажите, что $\sum_{d|n}\mu^2(d)/\phi(d) = n/ \phi(n).$ \hspace{4mm} [Подсказка: Смотри подсказку в Задаче 1.]
+  \item Используя Задачу 3, Главу 6.2, дайте общее доказательство факта, что
+  $$n \sum_{d|n} \mu(d)/d = \phi(n).$$
+  \item Если число $n > 1$ оно просто факторизируется $n = p_1^{k_1}p_2^{k_2} \dots p_r^{k_r}$, установить следующее:
+    \begin{enumerate}
+        \item $$ \sum_{d|n}\mu(d)\phi(d) = (2 - p_1)(2 - p_2)\dots (2 - p_r) $$
+        \item $$ \sum_{d|n}d\phi(d) = \left(\frac{p_1^{2k_1+1} + 1}{p_1+1}\right)\left(\frac{p_2^{2k_2+1} + 1}{p_2+1}\right)\dots \left(\frac{p_r^{2k_r+1} + 1}{p_r+1}\right) $$
+        \item $$ \sum_{d|n}\phi(d)/d = \left(1 + \frac{k_1(p_1 - 1)}{p_1}\right)\left(1 + \frac{k_2(p_2 - 1)}{p_2}\right) \dots \left(1 + \frac{k_r(p_r - 1)}{p_r}\right) $$
+        [Подсказка: Для части (а), используйте Задачу 3, Глава 6-2.]
+    \end{enumerate}
+  \item Верифицируйте формулу $ \sum_{d = 1}^n \phi(d)[n/d] = n(n + 1)/2 $ для любых положительных чисел $n$.
+  [Подсказка: Это прямое применение теорем 6-11 и 7-6.]
+  \item Если $n$ это квадратно-свободное число, докажите что $\sum_{d|n} \sigma(d^{k-1})\phi(d) = n^k$ для всех чисел $k \geq 2$.
+  \item  Для квадратно-свободных чисел $n > 1$, покажите что $\tau(n^2) = n$ тогда и только тогда, когда $n = 3$.
+  \item Докажите, что $3 | \sigma(3n+2)$ и $4 | \sigma(4n + 3)$ для любых положительных чисел $n$. 
+  \item
+    \begin{enumerate}
+        \item Дано $k > 0$, установите, что существует последовательность из $k$ последовательных чисел $n+1, n+2, \dots , n+k$, удовлетворяющих
+        $$\mu (n+1) = \mu (n+2) = \dots = \mu (n+k) = 0.$$
+        [Подсказка: Рассмотрим систему линейных уравнений
+        $$ x \equiv -1 (mod 4), x \equiv -2 (mod 9), \dots , x \equiv -k (mod p_k^2) $$
+        где $p_k$ это k-тое простое число]
+        \item Найти четыре последовательных числа для $\mu(n) = 0.$
+    \end{enumerate}
+  \item Доказать утверждения ниже:
+    \begin{enumerate}
+        \item Число $n$ простое тогда и только тогда, когда $\sigma(n) + \phi(n) = n_{\tau}(n)$. [Подсказска: Во-первых выведите соотношение $\sum_{d|n} \sigma(d)\phi(n/d) = n_{\tau}(n).$]
+        \item Число $n$ простое тогда и только тогда, когда $\phi(n) | n - 1$ и $ n + 1 | \sigma(n)$. [Подсказка: Посмотрите Задачу 11(а), Глава 7-2.]
+    \end{enumerate}
+  \item Докажите, что существует бесконечно много чисел $n$, которые удовлетворяют $\phi(n) = n/3$, но ни одного, удовлетворяющего $\phi(n) = n/4$
+  \item Для $n > 2$, установить соотношение $\phi(n^2) + \phi((n+1)^2) \leq 2n^2$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
