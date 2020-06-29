@@ -1,0 +1,111 @@
+\documentclass[aspectratio=169, 11pt]{beamer} 
+
+
+% Титульный слайд: текст %
+\newcommand{\university}{Балтийский Федеральный Институт имени Иммануила Канта}
+\newcommand{\faculty}{Институт физико-математиских и информационных технологий}
+\newcommand{\department}{Математические методы защиты информации }
+\newcommand{\city}{Калининград}
+\newcommand{\num}{ № 1}
+\newcommand{\docname}{Исследовательский проект по теме «Оптические иллюзии»}
+\newcommand{\studentname}{Щепецков Л.Ю.}
+\newcommand{\group}{Компьютерной Безопасности 1 Курса}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{caption} 
+\usepackage{here}
+\usepackage{animate}
+\usepackage{bm}
+
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setkeys{russian}{babelshorthands=true}
+\addto\captionsrussian{
+  \renewcommand{\partname}{Глава}
+  \renewcommand{\contentsname}{Содержание}
+}
+\usetheme{metropolis}
+\usecolortheme{seagull}
+\beamertemplatenavigationsymbolsempty
+\hypersetup{unicode=true,colorlinks=true,linkcolor=red,citecolor=green,filecolor=magenta,urlcolor=cyan,        		       
+    pdftitle={\docname},   	    
+    pdfauthor={\studentname},      
+    pdfsubject={\docname},         
+    pdfcreator={\studentname}, 	       
+    pdfproducer={Overleaf}, 		     
+    pdfkeywords={\docname}
+}
+
+% Титульный слайд: формат %
+
+\institute[\university]{\university \\ \faculty}
+\title[\docname]{\docname}
+\author[\studentname]{\small Выполнил: студент \group \ \studentname }
+\date{2020} 
+
+
+% Титульный слайд: дизайн %
+\makeatletter
+\setbeamertemplate{title page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \centering
+    \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+    \vfill
+    \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+    \vfill
+    \usebeamertemplate*{title separator}
+    \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+
+\setbeamertemplate{title}{
+  \vspace{0.5cm}
+  \inserttitle
+  \par
+  \vspace*{0.5em}
+}
+
+\setbeamertemplate{date}{
+  \vspace{0.5cm}
+  \city \\
+  \insertdate
+  \par
+  \vspace*{0.5em}
+}
+\makeatother
+\setbeamerfont{institute}{size=\footnotesize}
+\setbeamerfont{date}{size=\footnotesize}
+
+
+
+\begin{document}
+
+% Титуальный слайд: инициализация%
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Второй слайд %
+\begin{frame}{Задачи и методы решения}
+\begin{itemize}
+    \item Проанализировать источники по теме исследования.
+    \item Провести анкетирование
+    \item Создание стенда с результатами исследования.
+\end{itemize}
+\end{frame}
+
+% Третий слайд%
+\begin{frame}{Вывод}
+\begin{itemize}
+    \item Оптические иллюзии опасны так же сильно, как и психотропные вещества.
+    \item Изучение эффекта «Оптических иллюзий» идёт довольно медленно.
+    \item Требуются дальнейшие изучения Эффекта «Оптических иллюзий».
+    \item Найдены люди, которые планируют внести свой вклад в изучение темы воздействия «Оптических иллюзий» как психотропного вещества.
+\end{itemize}
+\end{frame}
+
+\end{document}
